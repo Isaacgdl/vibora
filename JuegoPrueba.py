@@ -1,3 +1,11 @@
+"""
+Equipo 3:
+Andrea Catalina Fernández Mena          A01197705
+Roberto Abraham Pérez Iga               A01384237
+Alan Isaac Garcia De Leon               A01383111
+"""
+
+
 from turtle import *
 from random import randrange
 from freegames import square, vector
