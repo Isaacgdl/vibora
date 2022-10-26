@@ -1,17 +1,26 @@
 from turtle import *
 from random import randrange
 from freegames import square, vector
-import random
+
+#Radomizar los colores de comida y serpiente
+import random as rd
 #se inicializan todos los objetos que se encontraran dentro del juego
-colores=["yellow","blue","green","orange"]
+colores=["yellow","blue","green","orange","purple"]
+colores2=["brown","cyan","gray","pink","gold"]
+color = rd.choice(colores)
+color2 = rd.choice(colores2)
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
-#FUncion para cambiar la direccino en la que se mueve la vibora.
+
+#Funcion para cambiar la direccino en la que se mueve la vibora.
 def change(x, y):
     "Change snake direction."
     aim.x = x
     aim.y = y
+
+#crear una lista para los movimientos 
+movement = [vector(0,10),vector(0,-10),vector(10,0),vector(-10,0)]
 
 def inside(head):
     "Return True if head inside boundaries."
@@ -28,6 +37,10 @@ def move():
         return
 
     snake.append(head)
+    
+   # def moveFood():
+    #"Move food forward one segment."
+    #food = snake[-1].copy()
 
     if head == food:
         print('Snake:', len(snake))
@@ -39,12 +52,16 @@ def move():
     clear()
 
     for body in snake:
-       # color = colores[random.randint(0, len(colores) - 1)]
-        color = random.choice(colores)
-        #colorf = color
         square(body.x, body.y, 9, color)
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, color2)
+
+    #Movilizar la comida
+    if not inside(food):
+        square(food.x, food.y, 9, color2)
+    else: 
+        food.move(rd.sample(movement,1)[0])
+
     update()
     ontimer(move, 100)
 
